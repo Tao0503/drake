@@ -13,10 +13,12 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     unzip \
     openjdk-11-jdk \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # 安装 Bazelisk（用于自动管理 Bazel 版本）
-RUN pip3 install bazelisk
+RUN curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64 -o /usr/local/bin/bazelisk && \
+    chmod +x /usr/local/bin/bazelisk
 
 # 设置工作目录
 WORKDIR /app
@@ -25,7 +27,7 @@ WORKDIR /app
 COPY . .
 
 # 使用 Bazelisk 构建项目
-RUN bazelisk build //:install
+RUN /usr/local/bin/bazelisk build //:install
 
 # 运行项目
-CMD ["bazelisk", "run", "//:install"]
+CMD ["/usr/local/bin/bazelisk", "run", "//:install"]
