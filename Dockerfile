@@ -35,6 +35,7 @@ RUN apt-get install -y \
     unzip \
     openjdk-11-jdk \
     curl \
+    libmumps-seq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # 更新默认的 GCC 和 G++ 版本到 11
