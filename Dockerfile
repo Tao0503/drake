@@ -9,10 +9,14 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     git \
-    libeigen3-dev \
-    libgflags-dev \
-    libgoogle-glog-dev \
+    python3 \
+    python3-pip \
+    unzip \
+    openjdk-11-jdk \
     && rm -rf /var/lib/apt/lists/*
+
+# 安装 Bazelisk（用于自动管理 Bazel 版本）
+RUN pip3 install bazelisk
 
 # 设置工作目录
 WORKDIR /app
@@ -20,8 +24,8 @@ WORKDIR /app
 # 复制项目文件到容器中
 COPY . .
 
-# 创建构建目录并构建项目
-RUN mkdir -p build && cd build && cmake .. && make
+# 使用 Bazelisk 构建项目
+RUN bazelisk build //:install
 
-# 运行项目（替换为您的可执行文件名称）
-CMD ["./build/your_executable_name"]
+# 运行项目
+CMD ["bazelisk", "run", "//:install"]
