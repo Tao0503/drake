@@ -17,6 +17,8 @@ RUN apt-get install -y \
     libfmt-dev \
     libeigen3-dev \
     libglib2.0-dev \
+    libgl1-mesa-dev \
+    libglu1-mesa-dev \
     build-essential \
     cmake \
     git \
