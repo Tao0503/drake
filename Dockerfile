@@ -4,8 +4,15 @@ FROM ubuntu:20.04
 # 设置非交互模式以避免在安装过程中卡住
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 更新包管理器并安装必要的工具和依赖
-RUN apt-get update && apt-get install -y \
+# 更新包管理器并添加软件源
+RUN apt-get update && apt-get install -y software-properties-common && \
+    add-apt-repository ppa:ubuntu-toolchain-r/test && \
+    apt-get update
+
+# 安装 GCC 11 和其他必要的工具和依赖
+RUN apt-get install -y \
+    gcc-11 \
+    g++-11 \
     build-essential \
     cmake \
     git \
@@ -15,6 +22,10 @@ RUN apt-get update && apt-get install -y \
     openjdk-11-jdk \
     curl \
     && rm -rf /var/lib/apt/lists/*
+
+# 更新默认的 GCC 和 G++ 版本到 11
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 100 && \
+    update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-11 100
 
 # 安装 Bazelisk（用于自动管理 Bazel 版本）
 RUN curl -L https://github.com/bazelbuild/bazelisk/releases/download/v1.17.0/bazelisk-linux-amd64 -o /usr/local/bin/bazelisk && \
