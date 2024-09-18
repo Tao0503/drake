@@ -9,11 +9,12 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update
 
-# 安装 GCC 11、pkg-config 和其他必要的工具和依赖
+# 安装 GCC 11、pkg-config、libfmt-dev 和其他必要的工具和依赖
 RUN apt-get install -y \
     gcc-11 \
     g++-11 \
     pkg-config \
+    libfmt-dev \
     build-essential \
     cmake \
     git \
