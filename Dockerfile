@@ -26,6 +26,9 @@ WORKDIR /app
 # 复制项目文件到容器中
 COPY . .
 
+# 创建缺少的配置文件目录和空文件（如果有需要）
+RUN mkdir -p /app/gen && touch /app/gen/environment.bazelrc
+
 # 使用 Bazelisk 构建项目
 RUN /usr/local/bin/bazelisk build //:install
 
