@@ -19,20 +19,22 @@ RUN apt-get install -y \
     libglib2.0-dev \
     libgl1-mesa-dev \
     libglu1-mesa-dev \
-    build-essential \
-    cmake \
-    git \
-    python3 \
-    python3-pip \
-    unzip \
-    openjdk-11-jdk \
-    curl \
+    libglfw3-dev \
+    libglew-dev \
     libspdlog-dev \
     libboost-all-dev \
     libgflags-dev \
     libgoogle-glog-dev \
     libprotobuf-dev \
     protobuf-compiler \
+    python3 \
+    python3-pip \
+    python3-yaml \
+    cmake \
+    git \
+    unzip \
+    openjdk-11-jdk \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 # 更新默认的 GCC 和 G++ 版本到 11
