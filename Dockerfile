@@ -16,6 +16,7 @@ RUN apt-get install -y \
     pkg-config \
     libfmt-dev \
     libeigen3-dev \
+    libglib2.0-dev \
     build-essential \
     cmake \
     git \
