@@ -9,12 +9,13 @@ RUN apt-get update && apt-get install -y software-properties-common && \
     add-apt-repository ppa:ubuntu-toolchain-r/test && \
     apt-get update
 
-# 安装 GCC 11、pkg-config、libfmt-dev 和其他必要的工具和依赖
+# 安装 GCC 11、G++ 11、以及其他必要的工具和依赖库
 RUN apt-get install -y \
     gcc-11 \
     g++-11 \
     pkg-config \
     libfmt-dev \
+    libeigen3-dev \
     build-essential \
     cmake \
     git \
@@ -23,6 +24,12 @@ RUN apt-get install -y \
     unzip \
     openjdk-11-jdk \
     curl \
+    libspdlog-dev \
+    libboost-all-dev \
+    libgflags-dev \
+    libgoogle-glog-dev \
+    libprotobuf-dev \
+    protobuf-compiler \
     && rm -rf /var/lib/apt/lists/*
 
 # 更新默认的 GCC 和 G++ 版本到 11
